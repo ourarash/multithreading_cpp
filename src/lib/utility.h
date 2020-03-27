@@ -20,14 +20,14 @@ void PrintVector(std::vector<T> input) {
 //-----------------------------------------------------
 class AccumulateFunctor {
  public:
-  void operator()(int64_t start, int64_t end) {
+  void operator()(uint64_t start, uint64_t end) {
     _sum = 0;
     for (auto i = start; i < end; i++) {
       _sum += i;
     }
     std::cout << _sum << std::endl;
   }
-  int64_t _sum;
+  uint64_t _sum;
 };
 //-----------------------------------------------------
 void AccumulateRange(uint64_t &sum, uint64_t start, uint64_t end) {

@@ -34,3 +34,9 @@ cc_binary(
     srcs = ["async_lambda_main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
+
+cc_binary(
+    name = "number_of_cores",
+    srcs = ["number_of_cores.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)

@@ -10,7 +10,7 @@
 //  1. With bazel: bazel run src/main:vector_of_threads_main
 //  2. With plain g++: g++ -std=c++17 -lpthread src/main/vector_of_threads_main.cc  -I ./
 int main() {
-  const int number_of_threads = 10;
+  const int number_of_threads = 1000;
   uint64_t number_of_elements = 1000 * 1000* 1000;
   uint64_t step = number_of_elements / number_of_threads;
   std::vector<std::thread> threads;

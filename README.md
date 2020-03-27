@@ -21,7 +21,6 @@ git clone https://github.com/ourarash/multithreading_cpp.git
 You can run this either using `bazel` OR just plain `g++`.
 
 
-
 For `bazel`:
 
 ```bash
