@@ -10,6 +10,16 @@ Features:
 - [x] Supports Google [Bazel](https://bazel.build/)
 
 
+
+Here is a video that explains more about how to use Google Test with Bazel in Visual Studio Code:
+
+<table><tr><td>
+
+<a href="https://youtu.be/3aqxaZsvn80">
+<img border="5" alt="Debugging C++ in Visual Studio Code using gcc/gdb and Bazel" src="https://raw.githubusercontent.com/ourarash/cpp-template/master/youtube.png" width="400">
+</a>
+</td></tr></table>
+
 ## Installation
 
 ```bash
