@@ -1,6 +1,6 @@
-# C++ Template for Bazel and Google Test
+# Multi Threading Tutorial in C++
 
-> Multi Threading Tutorial in C++
+> Quick demonstration of multi threading in modern C++
 
 Features:
 
