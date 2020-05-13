@@ -11,7 +11,7 @@ Features:
 
 
 
-Here is a video that explains more about how to use Google Test with Bazel in Visual Studio Code:
+Here is the video explaining how to use multi-threading in C++:
 
 <table><tr><td>
 
