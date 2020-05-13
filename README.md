@@ -16,7 +16,7 @@ Here is the video explaining how to use multi-threading in C++:
 <table><tr><td>
 
 <a href="https://youtu.be/3aqxaZsvn80">
-<img border="5" alt="Debugging C++ in Visual Studio Code using gcc/gdb and Bazel" src="https://raw.githubusercontent.com/ourarash/cpp-template/master/youtube.png" width="400">
+<img border="5" alt="Debugging C++ in Visual Studio Code using gcc/gdb and Bazel" src="https://github.com/ourarash/multithreading_cpp/blob/master/youtube.png?raw=true" width="400">
 </a>
 </td></tr></table>
 
