@@ -6,32 +6,44 @@
 #include <thread>
 #include <vector>
 
-#include "src/lib/utility.h"
+#include "src/lib/fork-join/fork-join.h"
 
-// A demo for creating two threads
+// A demo for shared_lock and shared_mutex: Multiple readers
+// Writers use unique_lock, readers use shared_lock
+
 // Run this using one of the following methods:
-//  1. With bazel: bazel run src/main/mutex:lock_unlock_main
+//  1. With bazel: bazel run src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
 //  2. With plain g++: g++ -std=c++17 -lpthread
-//  src/main/mutex/shared_mutex_main.cc  -I ./
+//  src/main/mutex/{THIS_FILE_NAME}  -I ./
 std::shared_mutex g_shared_mutex;
-int g_shared_var = 1;
+unsigned long g_counter;
 
-int GetValue() {
-  std::shared_lock<std::shared_mutex> sl(g_shared_mutex);
-  return g_shared_var;
+void Incrementer() {
+  for (size_t i = 0; i < 100; i++) {
+    std::unique_lock<std::shared_mutex> ul(g_shared_mutex);
+    g_counter++;
+  }
 }
 
-void SetValue(int newVal) {
-  std::unique_lock<std::shared_mutex> sl(g_shared_mutex);
-  g_shared_var = newVal;
+void ImJustAReader() {
+  for (size_t i = 0; i < 100; i++) {
+    std::shared_lock<std::shared_mutex> sl(g_shared_mutex);
+    std::cout << "g_counter: " << g_counter << std::endl;
+  }
 }
 
 int main() {
-  auto t1 = std::async(GetValue);
-  auto t2 = std::async(SetValue, 3);
+  std::vector<std::thread> threads;
 
-  int readValue = t1.get();
-  t2.get();
+  for (int i = 0; i < 100; i++) {
+    threads.push_back(std::thread(Incrementer));
+    threads.push_back(std::thread(ImJustAReader));
+  }
 
-  std::cout << "readValue: " << readValue << std::endl;
+  for (std::thread &t : threads) {
+    t.join();
+  }
+  std::cout << "g_counter: " << g_counter << std::endl;
+
+  assert(g_counter == 100 * 100);
 }

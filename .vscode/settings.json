@@ -72,7 +72,9 @@
     "vector": "cpp",
     "numeric": "cpp",
     "future": "cpp",
-    "shared_mutex": "cpp"
+    "shared_mutex": "cpp",
+    "condition_variable": "cpp",
+    "random": "cpp"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "never",

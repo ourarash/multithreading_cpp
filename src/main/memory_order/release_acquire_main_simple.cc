@@ -20,7 +20,6 @@ void producer() {
 }
 
 void consumer() {
- 
   std::cout << "Before load" << std::endl;
 
   int aa = a.load(std::memory_order_acquire);

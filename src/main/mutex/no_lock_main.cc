@@ -7,17 +7,17 @@
 
 #include "src/lib/utility.h"
 
-// A demo for creating two threads
+// A demo for lock and unlock of mutexes
+
 // Run this using one of the following methods:
 //  1. With bazel: bazel run src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
 //  2. With plain g++: g++ -std=c++17 -lpthread
 //  src/main/mutex/{THIS_FILE_NAME}  -I ./
-std::mutex g_mutex;
+
 unsigned long g_counter;
 
 void Incrementer() {
   for (size_t i = 0; i < 100; i++) {
-    std::lock_guard<std::mutex> guard(g_mutex);
     g_counter++;
   }
 }
@@ -25,7 +25,7 @@ void Incrementer() {
 int main() {
   std::vector<std::thread> threads;
 
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 2; i++) {
     threads.push_back(std::thread(Incrementer));
   }
 
@@ -34,5 +34,5 @@ int main() {
   }
   std::cout << "g_counter: " << g_counter << std::endl;
 
-  assert(g_counter == 100 * 100);
+  assert(g_counter == 100 );
 }
