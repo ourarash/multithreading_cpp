@@ -1,3 +1,12 @@
+// A demo for mutex and locks
+// By Ari Saif
+// Run this using one of the following methods:
+//  1. With bazel:
+//      bazel run \
+//      src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
+//  2. With g++:
+//      g++ -std=c++17 -lpthread \
+//      src/main/mutex/{THIS_FILE_NAME}.cc  -I ./
 #include <future>
 #include <iostream>
 #include <mutex>
@@ -7,12 +16,6 @@
 
 #include "src/lib/utility.h"
 
-// A demo for lock and unlock of mutexes
-
-// Run this using one of the following methods:
-//  1. With bazel: bazel run src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
-//  2. With plain g++: g++ -std=c++17 -lpthread
-//  src/main/mutex/{THIS_FILE_NAME}  -I ./
 std::mutex g_mutex;
 unsigned long g_counter;
 

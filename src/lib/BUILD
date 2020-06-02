@@ -1,6 +1,8 @@
+# https://docs.bazel.build/versions/master/be/c-cpp.html#cc_library
 cc_library(
-    name = "csp_lib",
-    hdrs = ["csp/csp.h"],
-    srcs = ["csp/csp.cc"],
+    name = "utility_lib",
+    # srcs = glob(["**/*.cc"]),
+    hdrs = ["utility.h"],
     visibility = ["//visibility:public"],
 )
+

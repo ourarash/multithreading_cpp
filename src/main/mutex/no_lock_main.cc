@@ -1,3 +1,12 @@
+// A demo for incorrectly using shared memory without mutex and locks
+// By Ari Saif
+// Run this using one of the following methods:
+//  1. With bazel:
+//      bazel run \
+//      src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
+//  2. With g++:
+//      g++ -std=c++17 -lpthread \
+//      src/main/mutex/{THIS_FILE_NAME}.cc  -I ./
 #include <future>
 #include <iostream>
 #include <mutex>
@@ -6,13 +15,6 @@
 #include <vector>
 
 #include "src/lib/utility.h"
-
-// A demo for lock and unlock of mutexes
-
-// Run this using one of the following methods:
-//  1. With bazel: bazel run src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
-//  2. With plain g++: g++ -std=c++17 -lpthread
-//  src/main/mutex/{THIS_FILE_NAME}  -I ./
 
 unsigned long g_counter;
 
@@ -34,5 +36,5 @@ int main() {
   }
   std::cout << "g_counter: " << g_counter << std::endl;
 
-  assert(g_counter == 100 );
+  assert(g_counter == 100);
 }

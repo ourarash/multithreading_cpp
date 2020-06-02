@@ -1,3 +1,13 @@
+// A demo for unique_lock: similar to lock_guard, but it can
+// be lock and unlock multiple times.
+// By Ari Saif
+// Run this using one of the following methods:
+//  1. With bazel:
+//      bazel run \
+//      src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
+//  2. With g++:
+//      g++ -std=c++17 -lpthread \
+//      src/main/mutex/{THIS_FILE_NAME}.cc  -I ./
 #include <future>
 #include <iostream>
 #include <mutex>  // For std::unique_lock
@@ -7,13 +17,6 @@
 
 #include "src/lib/utility.h"
 
-// A demo for unique_lock: similar to lock_guard, but it can
-// be lock and unlock multiple times.
-
-// Run this using one of the following methods:
-//  1. With bazel: bazel run src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
-//  2. With plain g++: g++ -std=c++17 -lpthread
-//  src/main/mutex/{THIS_FILE_NAME}.cc  -I ./
 std::mutex g_mutex;
 unsigned long g_counter;
 

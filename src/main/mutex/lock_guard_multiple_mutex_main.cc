@@ -1,3 +1,12 @@
+// A demo for using multiple locks which may cause deadlock
+// By Ari Saif
+// Run this using one of the following methods:
+//  1. With bazel:
+//      bazel run \
+//      src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
+//  2. With g++:
+//      g++ -std=c++17 -lpthread \
+//      src/main/mutex/{THIS_FILE_NAME}.cc  -I ./s
 #include <future>
 #include <iostream>
 #include <mutex>
@@ -7,11 +16,6 @@
 
 #include "src/lib/utility.h"
 
-// A demo for creating two threads
-// Run this using one of the following methods:
-//  1. With bazel: bazel run src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
-//  2. With plain g++: g++ -std=c++17 -lpthread
-//  src/main/mutex/{THIS_FILE_NAME}  -I ./
 std::mutex g_mutex1, g_mutex2;
 unsigned long g_counter;
 

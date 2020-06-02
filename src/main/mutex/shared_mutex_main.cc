@@ -1,20 +1,20 @@
+// A demo for shared_mutex and shared_lock
+// By Ari Saif
+// Run this using one of the following methods:
+//  1. With bazel:
+//      bazel run \
+//      src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
+//  2. With g++:
+//      g++ -std=c++17 -lpthread \
+//      src/main/mutex/{THIS_FILE_NAME}.cc  -I ./
 #include <future>
 #include <iostream>
-#include <mutex>  // For std::unique_lock
+#include <mutex>
 #include <numeric>
 #include <shared_mutex>
 #include <thread>
 #include <vector>
 
-#include "src/lib/fork-join/fork-join.h"
-
-// A demo for shared_lock and shared_mutex: Multiple readers
-// Writers use unique_lock, readers use shared_lock
-
-// Run this using one of the following methods:
-//  1. With bazel: bazel run src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
-//  2. With plain g++: g++ -std=c++17 -lpthread
-//  src/main/mutex/{THIS_FILE_NAME}  -I ./
 std::shared_mutex g_shared_mutex;
 unsigned long g_counter;
 
