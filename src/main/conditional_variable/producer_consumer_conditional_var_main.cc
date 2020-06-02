@@ -7,7 +7,6 @@
 #include <thread>
 #include <vector>
 
-#include "src/lib/utility.h"
 std::mutex g_mutex;
 std::condition_variable g_cv;
 bool g_ready = false;
