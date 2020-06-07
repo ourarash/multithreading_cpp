@@ -2,13 +2,13 @@
 // By Ari Saif
 // Run this using one of the following methods:
 //  1. With bazel:
-//      bazel run \
+//      bazel run --cxxopt='-std=c++17' \
 //      src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
 //  2. With g++:
 //      g++ -std=c++17 -lpthread \
 //      src/main/mutex/{THIS_FILE_NAME}.cc  -I ./
-#include <future>
 #include <iostream>
+#include <map>
 #include <mutex>
 #include <numeric>
 #include <thread>
@@ -28,16 +28,25 @@ void Incrementer() {
 }
 
 int main() {
-  std::vector<std::thread> threads;
+  std::map<int, int> count;
+  int N = 1000;
+  for (int i = 0; i < N; i++) {
+    g_counter = 0;
 
-  for (int i = 0; i < 100; i++) {
-    threads.push_back(std::thread(Incrementer));
+    std::vector<std::thread> threads;
+
+    for (int i = 0; i < 100; i++) {
+      threads.push_back(std::thread(Incrementer));
+    }
+
+    for (std::thread &t : threads) {
+      t.join();
+    }
+    // std::cout << "g_counter: " << g_counter << std::endl;
+    std::cout << g_counter << ", ";
+    count[g_counter]++;
   }
-
-  for (std::thread &t : threads) {
-    t.join();
-  }
-  std::cout << "g_counter: " << g_counter << std::endl;
-
-  assert(g_counter == 100 * 100);
+  std::cout << std::endl;
+  // Assert that we always got 100*100
+  assert(count[100 * 100] == N);
 }

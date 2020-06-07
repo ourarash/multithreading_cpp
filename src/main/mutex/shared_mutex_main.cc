@@ -2,7 +2,7 @@
 // By Ari Saif
 // Run this using one of the following methods:
 //  1. With bazel:
-//      bazel run \
+//      bazel run --cxxopt='-std=c++17' \
 //      src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
 //  2. With g++:
 //      g++ -std=c++17 -lpthread \

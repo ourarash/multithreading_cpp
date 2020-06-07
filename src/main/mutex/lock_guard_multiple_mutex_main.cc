@@ -2,7 +2,7 @@
 // By Ari Saif
 // Run this using one of the following methods:
 //  1. With bazel:
-//      bazel run \
+//      bazel run --cxxopt='-std=c++17' \
 //      src/main/mutex:{THIS_FILE_NAME_WITHOUT_EXTENSION}
 //  2. With g++:
 //      g++ -std=c++17 -lpthread \
@@ -14,11 +14,13 @@
 #include <thread>
 #include <vector>
 
-#include "src/lib/utility.h"
-
 std::mutex g_mutex1, g_mutex2;
 unsigned long g_counter;
 
+/**
+ * Uses two locks in series. The order is the opposite of Incrementer_Bad2. This
+ * may cause deadlock!
+ */
 void Incrementer_Bad1() {
   for (size_t i = 0; i < 100; i++) {
     std::lock_guard<std::mutex> lock1(g_mutex1);
@@ -27,6 +29,10 @@ void Incrementer_Bad1() {
   }
 }
 
+/**
+ * Uses two locks in series. The order is the opposite of Incrementer_Bad1. This
+ * may cause deadlock!
+ */
 void Incrementer_Bad2() {
   for (size_t i = 0; i < 100; i++) {
     std::lock_guard<std::mutex> lock2(g_mutex2);
@@ -35,6 +41,9 @@ void Incrementer_Bad2() {
   }
 }
 
+/**
+ * Uses std::lock to lock two mutexes atomically. This avoids deadlock.
+ */
 void Incrementer_Better() {
   for (size_t i = 0; i < 100; i++) {
     // lock both mutexes without deadlock
@@ -47,6 +56,9 @@ void Incrementer_Better() {
   }
 }
 
+/**
+ * Uses std::scoped_lock to lock two mutexes atomically. This avoids deadlock.
+ */
 void Incrementer_Best() {
   for (size_t i = 0; i < 100; i++) {
     std::scoped_lock scoped_lock_name(g_mutex1, g_mutex2);
