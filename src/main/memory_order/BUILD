@@ -37,6 +37,11 @@ cc_binary(
     deps = ["//src/lib:SolutionLib"],
 )
 
+cc_binary(
+    name = "seq_cst_main",
+    srcs = ["seq_cst_main.cc"],
+    deps = [],
+)
 
 
 
