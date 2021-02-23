@@ -27,6 +27,7 @@ class AccumulateFunctor {
     }
     std::cout << _sum << std::endl;
   }
+  // ~AccumulateFunctor(){std::cout << "AccumulateFunctor Destructor." << std::endl;}
   uint64_t _sum;
 };
 //-----------------------------------------------------

@@ -18,6 +18,12 @@ cc_binary(
 )
 
 cc_binary(
+    name = "producer_consumer_conditional_var_simple",
+    srcs = ["producer_consumer_conditional_var_simple.cc"],
+    deps = ["//src/lib:csp_lib"],
+)
+
+cc_binary(
     name = "conditional_var_csp_main",
     srcs = ["conditional_var_csp_main.cc"],
     deps = ["//src/lib:csp_lib"],
@@ -46,6 +52,3 @@ cc_binary(
     srcs = ["dining_philosophore_main.cc"],
     deps = ["//src/lib:csp_lib"],
 )
-
-
-

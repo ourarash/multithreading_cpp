@@ -24,6 +24,12 @@ cc_binary(
 )
 
 cc_binary(
+    name = "functors_main_unique_ptr",
+    srcs = ["functors_main_unique_ptr.cc"],
+    deps = ["//src/lib:utility_lib"],
+)
+
+cc_binary(
     name = "async_main",
     srcs = ["async_main.cc"],
     deps = ["//src/lib:utility_lib"],

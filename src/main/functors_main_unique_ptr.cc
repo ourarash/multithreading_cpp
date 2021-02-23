@@ -16,15 +16,16 @@ int main() {
   uint64_t step = number_of_elements / number_of_threads;
   std::vector<std::thread> threads;
 
-  std::vector<AccumulateFunctor *> functors;
+  std::vector<std::unique_ptr<AccumulateFunctor>> functors;
 
   for (int i = 0; i < number_of_threads; i++) {
-    AccumulateFunctor *functor = new AccumulateFunctor();
+    // Using a unique pointer to avoid memory leak.
+    std::unique_ptr<AccumulateFunctor> functor(new AccumulateFunctor());
     threads.push_back(
         std::thread(std::ref(*functor), i * step, (i + 1) * step));
     // It would cause incorrect result if we added a functor instead of a
     // pointer to it.
-    functors.push_back(functor);
+    functors.push_back(std::move(functor));
   }
 
   for (std::thread &t : threads) {
@@ -34,7 +35,7 @@ int main() {
   }
 
   int64_t total = 0;
-  for (auto pf : functors) {
+  for (auto &pf : functors) {
     total += pf->_sum;
   }
   std::cout << "total: " << total << std::endl;

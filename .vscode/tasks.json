@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build Example (Debug)",
+      "label": "Bazel Build (Debug)",
       "type": "shell",
       "command": "bazel  build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} -c dbg",
       "windows": {
@@ -18,7 +18,22 @@
       },
     },
     {
-      "label": "Build Example (Run)",
+      "label": "Bazel Build (Run)",
+      "type": "shell",
+      "command": "bazel  build --cxxopt='-std=c++17' --run_under=lldb ${relativeFileDirname}:${fileBasenameNoExtension}",
+      "windows": {
+        "command": "bazel build --cxxopt='-std=c++17' --run_under=lldb ${relativeFileDirname}:${fileBasenameNoExtension}"
+      },
+      "osx": {
+        "command": "bazel build --cxxopt='-std=c++17' --run_under=lldb ${relativeFileDirname}:${fileBasenameNoExtension}",
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+    },
+    {
+      "label": "Bazel Build (Run)",
       "type": "shell",
       "command": "bazel  build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension}",
       "windows": {
@@ -26,6 +41,21 @@
       },
       "osx": {
         "command": "bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension}",
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+    },
+    {
+      "label": "Bazel Build (Run Opt)",
+      "type": "shell",
+      "command": "bazel  build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} -c opt",
+      "windows": {
+        "command": "bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} -c opt"
+      },
+      "osx": {
+        "command": "bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} -c opt",
       },
       "group": {
         "kind": "build",

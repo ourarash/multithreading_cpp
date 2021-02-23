@@ -7,6 +7,8 @@ Features:
 - [x] Creating task and threads
 - [x] Using function pointers, functors, and lambda functions
 - [x] Futures, promises, and async tasks
+- [x] Mutex and Locks
+- [x] Conditional Variables
 - [x] Supports Google [Bazel](https://bazel.build/)
 
 

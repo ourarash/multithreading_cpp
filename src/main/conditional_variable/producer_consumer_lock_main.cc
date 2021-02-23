@@ -60,6 +60,7 @@ void producer() {
   }
 }
 
+// This example doesn't have conditional variables.
 int main() {
   std::thread t1(consumer);
   std::thread t2(producer);

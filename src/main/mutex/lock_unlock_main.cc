@@ -44,9 +44,10 @@ int main() {
     }
     // std::cout << "g_counter: " << g_counter << std::endl;
     std::cout << g_counter << ", ";
+
     count[g_counter]++;
   }
   std::cout << std::endl;
-  // Assert that we always got 100*100
+  // Assert that we always get 100*100 (we count to 100, 100 times.)
   assert(count[100 * 100] == N);
 }
