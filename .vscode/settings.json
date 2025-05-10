@@ -80,7 +80,15 @@
     "regex": "cpp",
     "forward_list": "cpp",
     "unordered_set": "cpp",
-    "memory_resource": "cpp"
+    "memory_resource": "cpp",
+    "clocale": "cpp",
+    "*.tcc": "cpp",
+    "compare": "cpp",
+    "concepts": "cpp",
+    "numbers": "cpp",
+    "semaphore": "cpp",
+    "stop_token": "cpp",
+    "cfenv": "cpp"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "never",

@@ -1,8 +1,8 @@
+#include <future>
 #include <iostream>
 #include <numeric>
 #include <thread>
 #include <vector>
-#include <future>
 
 #include "src/lib/utility.h"
 
@@ -18,9 +18,10 @@ int main() {
   std::vector<std::future<uint64_t>> tasks;
 
   for (uint64_t i = 0; i < number_of_threads; i++) {
-    tasks.push_back(std::async(GetRangeSum, i * step, (i + 1) * step));
+    tasks.push_back(std::async(std::launch
+                               : async, GetRangeSum, i * step, (i + 1) * step));
   }
-  
+
   uint64_t total = 0;
   for (auto &t : tasks) {
     auto p = t.get();

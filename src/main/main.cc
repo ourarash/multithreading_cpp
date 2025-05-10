@@ -10,6 +10,9 @@
 //  1. With bazel: bazel run src/main:main
 //  2. With plain g++: g++ -std=c++17 -lpthread src/main/main.cc  -I ./
 int main() {
+  unsigned int n = std::thread::hardware_concurrency();
+  std::cout << n << " concurrent threads are supported.\n";
+
   const int number_of_threads = 2;
   const int number_of_elements = 1000 * 1000 * 1000;
   const int step = number_of_elements / number_of_threads;

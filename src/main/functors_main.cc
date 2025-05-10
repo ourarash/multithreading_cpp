@@ -37,6 +37,11 @@ int main() {
   for (auto pf : functors) {
     total += pf->_sum;
   }
+
+  for (auto &pf : functors) {
+    delete pf;
+  }
+
   std::cout << "total: " << total << std::endl;
 
   return 0;

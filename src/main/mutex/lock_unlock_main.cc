@@ -7,14 +7,13 @@
 //  2. With g++:
 //      g++ -std=c++17 -lpthread \
 //      src/main/mutex/{THIS_FILE_NAME}.cc  -I ./
+#include <cassert>
 #include <iostream>
 #include <map>
 #include <mutex>
 #include <numeric>
 #include <thread>
 #include <vector>
-
-#include "src/lib/utility.h"
 
 std::mutex g_mutex;
 unsigned long g_counter;
