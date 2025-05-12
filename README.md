@@ -9,6 +9,7 @@ Features:
 - [x] Futures, promises, and async tasks
 - [x] Mutex and Locks
 - [x] Conditional Variables
+- [x] JThreads
 - [x] Supports Google [Bazel](https://bazel.build/)
 
 
@@ -41,7 +42,7 @@ bazel run src/main:main
 
 For `g++`:
 ```bash
-g++ -std=c++17 -lpthread src/main/main.cc  -I ./
+g++ -std=c++20 -lpthread src/main/main.cc  -I ./
 ./a.out
 ```
 

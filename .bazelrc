@@ -1,0 +1,30 @@
+# Address sanitizer config
+# Use with bazel run --config=asan or lsan
+build:asan --strip=never
+build:asan --copt -fsanitize=address
+build:asan --copt -DADDRESS_SANITIZER
+build:asan --copt -O0
+build:asan --copt -g
+build:asan --copt -fno-omit-frame-pointer
+build:asan --linkopt -fsanitize=address
+build:asan --sandbox_debug 
+build:asan --spawn_strategy=standalone
+
+# Memory sanitizer config
+build:msan --strip=never
+build:msan --copt -fsanitize=memory
+build:msan --copt -O0
+build:msan --copt -g
+build:msan --linkopt -fsanitize=memory
+build:msan --sandbox_debug 
+build:msan --spawn_strategy=standalone
+
+# Thread sanitizer config
+build:tsan --copt -fsanitize=thread
+
+
+build --cxxopt='-std=c++23'
+build --cxxopt='-stdlib=libc++'
+build --cxxopt='-fexperimental-library'
+build --host_cxxopt='-std=c++23'
+build --host_cxxopt='-stdlib=libc++'

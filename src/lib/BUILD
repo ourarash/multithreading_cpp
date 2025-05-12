@@ -1,5 +1,3 @@
-load("@rules_cc//cc:defs.bzl", "cc_library")
-
 cc_library(
     name = "utility_lib",
     # srcs = glob(["**/*.cc"]),
@@ -16,8 +14,8 @@ cc_library(
 cc_library(
     name = "RangeAccumulatorLib",
     hdrs = ["range_accumulator.h"],
+    visibility = ["//visibility:public"],
     deps = [
         "@com_google_benchmark//:benchmark",
     ],
-    visibility = ["//visibility:public"],
 )

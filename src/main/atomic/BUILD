@@ -1,5 +1,3 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary")
-
 cc_binary(
     name = "vector_accumulator_benchmark",
     srcs = ["vector_accumulator_benchmark.cc"],
@@ -49,7 +47,6 @@ cc_binary(
         "@com_google_benchmark//:benchmark",
     ],
 )
-
 
 cc_binary(
     name = "sequential_consistency_main",

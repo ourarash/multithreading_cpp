@@ -88,7 +88,13 @@
     "numbers": "cpp",
     "semaphore": "cpp",
     "stop_token": "cpp",
-    "cfenv": "cpp"
+    "cfenv": "cpp",
+    "__verbose_abort": "cpp",
+    "charconv": "cpp",
+    "execution": "cpp",
+    "print": "cpp",
+    "queue": "cpp",
+    "variant": "cpp"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "never",

@@ -6,6 +6,16 @@ cc_binary(
 )
 
 cc_binary(
+    name = "jthread",
+    srcs = ["jthread.cc"],
+    copts = [
+        "-std=c++20",
+        "-stdlib=libc++",
+    ],
+    deps = ["//src/lib:utility_lib"],
+)
+
+cc_binary(
     name = "vector_of_threads_main",
     srcs = ["vector_of_threads_main.cc"],
     deps = ["//src/lib:utility_lib"],
@@ -14,6 +24,16 @@ cc_binary(
 cc_binary(
     name = "lambda_main",
     srcs = ["lambda_main.cc"],
+    deps = ["//src/lib:utility_lib"],
+)
+
+cc_binary(
+    name = "lambda_jthread_main",
+    srcs = ["lambda_jthread_main.cc"],
+    copts = [
+        "-std=c++20",
+        "-stdlib=libc++",
+    ],
     deps = ["//src/lib:utility_lib"],
 )
 
