@@ -22,7 +22,6 @@ build:msan --spawn_strategy=standalone
 # Thread sanitizer config
 build:tsan --copt -fsanitize=thread
 
-
 build --cxxopt='-std=c++23'
 build --cxxopt='-stdlib=libc++'
 build --cxxopt='-fexperimental-library'

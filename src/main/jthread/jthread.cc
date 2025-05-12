@@ -14,10 +14,14 @@
  * The results are then combined to get the total sum.
  */
 void compute_partial_sum(std::size_t num_threads, std::size_t index,
-                         std::size_t chunk_size, std::size_t total_elements,
+                         std::size_t total_elements,
                          std::vector<std::uint64_t> &partial_sums) {
 
+  const auto chunk_size = total_elements / num_threads;
   const auto start = index * chunk_size;
+
+  // Handle the case where total_elements is not evenly divisible by
+  // num_threads. The last thread will take the remainder.
   const auto end = (index == num_threads - 1)
                        ? total_elements
                        : std::min((index + 1) * chunk_size, total_elements);
@@ -37,15 +41,14 @@ std::uint64_t compute_total_sum(std::size_t num_threads,
     throw std::invalid_argument("Number of threads must be greater than 0");
   }
 
-  const auto chunk_size = total_elements / num_threads;
   std::vector<std::uint64_t> partial_sums(num_threads);
 
   // Launch threads to compute partial sums
   {
     std::vector<std::jthread> threads;
     for (auto i : std::views::iota(0uz, num_threads)) {
-      threads.emplace_back(compute_partial_sum, num_threads, i, chunk_size,
-                           total_elements, std::ref(partial_sums));
+      threads.emplace_back(compute_partial_sum, num_threads, i, total_elements,
+                           std::ref(partial_sums));
     }
   } // jthreads auto-join here
 
