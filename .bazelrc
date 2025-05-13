@@ -9,6 +9,7 @@ build:asan --copt -fno-omit-frame-pointer
 build:asan --linkopt -fsanitize=address
 build:asan --sandbox_debug 
 build:asan --spawn_strategy=standalone
+build --host_cxxopt='-std=c++23'
 
 # Memory sanitizer config
 build:msan --strip=never

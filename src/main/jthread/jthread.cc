@@ -57,6 +57,11 @@ std::uint64_t compute_total_sum(std::size_t num_threads,
                      partial_sums.end(), std::uint64_t{0});
 }
 
+//-----------------------------------------------------------------------------
+/**
+ * Unit tests for the compute_total_sum function.
+ */
+
 TEST(ComputeTotalSumTest, SingleThread) {
   constexpr std::size_t num_threads = 1;
   constexpr std::size_t total_elements = 10;
