@@ -1,3 +1,11 @@
+/**
+ * A demo for creating jthreads.
+ * Run this using one of the following methods:
+ * 1. With bazel: bazel test //src/main/jthread
+ * 2. With plain g++: g++ -std=c++23 -lpthread
+ * /Users/ari/github/multithreading_cpp/src/main/jthread/{THIS_FILE_NAME}.cc -I
+ * ./
+ */
 #include <algorithm>
 #include <cstdint>
 #include <execution>
@@ -13,21 +21,24 @@
  * Each thread calculates the sum of a portion of the range.
  * The results are then combined to get the total sum.
  */
-void compute_partial_sum(std::size_t num_threads, std::size_t index,
+void compute_partial_sum(std::size_t num_threads, std::size_t thread_index,
                          std::size_t total_elements,
                          std::vector<std::uint64_t> &partial_sums) {
-
+  // Calculate the size of each chunk
   const auto chunk_size = total_elements / num_threads;
-  const auto start = index * chunk_size;
 
-  // Handle the case where total_elements is not evenly divisible by
-  // num_threads. The last thread will take the remainder.
-  const auto end = (index == num_threads - 1)
-                       ? total_elements
-                       : std::min((index + 1) * chunk_size, total_elements);
+  // Determine the start and end indices for this thread's range
+  const auto start_index = thread_index * chunk_size;
+  const auto end_index =
+      (thread_index == num_threads - 1)
+          ? total_elements // Last thread handles the remainder
+          : start_index + chunk_size;
 
-  auto range = std::views::iota(start, end);
-  partial_sums[index] =
+  // Generate the range of numbers for this thread
+  auto range = std::views::iota(start_index, end_index);
+
+  // Compute the sum of the range and store it in the partial_sums vector
+  partial_sums[thread_index] =
       std::ranges::fold_left(range, std::uint64_t{0}, std::plus{});
 }
 
