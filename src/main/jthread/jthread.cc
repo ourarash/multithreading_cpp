@@ -1,5 +1,10 @@
 /**
  * A demo for creating jthreads.
+ * The code calculates the sum of integers from 0 to total_elements - 1 using
+ * multiple threads. Each thread computes a partial sum of a range of numbers,
+ * and the results are combined to get the total sum.
+ *
+ * Note that this code uses C++23 features and it contains the GTEST unit tests.
  * Run this using one of the following methods:
  * 1. With bazel: bazel test //src/main/jthread
  * 2. With plain g++: g++ -std=c++23 -lpthread
