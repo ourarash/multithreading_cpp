@@ -33,7 +33,8 @@ std::jthread t([](std::stop_token) {
 });
 
 // Don't forget to pass stop_token as the first argument!
-void doWorkWrong(int a, std::stop_token st) { // ❌ error: stop_token must be first
+void doWorkWrong(int a,
+                 std::stop_token st) { // ❌ error: stop_token must be first
   while (!st.stop_requested()) {
     // Do work
   }
@@ -44,3 +45,8 @@ void doWorkRight(std::stop_token st, int a) { // ✅ stop_token is first
     // Do work
   }
 }
+
+{
+  std::lock_guard<std::mutex> lock(m); // lock acquired
+                                       // critical section
+} // lock released automatically here

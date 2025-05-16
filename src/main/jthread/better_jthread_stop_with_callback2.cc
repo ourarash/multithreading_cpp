@@ -8,12 +8,14 @@
 #include <future>
 #include <iostream>
 #include <mutex>
+#include <ranges>
 #include <thread>
 
 struct SharedState {
-  std::mutex mtx;
   std::condition_variable cv;
+  std::mutex mtx;
   bool data_ready{false};
+  bool done{false};
 };
 
 /**
@@ -22,49 +24,44 @@ struct SharedState {
  */
 void consumer(std::stop_token st, SharedState &state) {
   std::stop_callback on_stop(st, [&] {
-    std::cout << "Stop requested → waking consumer\n";
+    std::cout << "Stop requested, waking consumer\n";
     state.cv.notify_one();
   });
 
   std::unique_lock<std::mutex> lock(state.mtx);
-  state.cv.wait(lock, [&] { return state.data_ready || st.stop_requested(); });
+  while (!state.done) {
+    state.cv.wait(lock,
+                  [&] { return st.stop_requested() || state.data_ready; });
+    if (st.stop_requested()) {
+      std::cout << "Consumer exiting due to stop\n";
+      return;
+    }
 
-  if (st.stop_requested())
-    std::cout << "Consumer exiting due to stop\n";
-  else
-    std::cout << "Consumer processed data\n";
+    if (state.data_ready) {
+      std::cout << "Consumer processed data\n";
+      state.data_ready = false;
+    }
+  }
 }
 
-void producer(SharedState &state, std::promise<void> &producer_promise) {
-  try {
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    throw std::runtime_error("Producer error!");
-
+void producer(SharedState &state) {
+  for (int _ : std::views::iota(0, 5)) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
     {
       std::lock_guard<std::mutex> lock(state.mtx);
       state.data_ready = true;
+      // if (i == 4) {
+      //   done = true; // signal completion
+      // }
     }
     state.cv.notify_one();
-    producer_promise.set_value();
-  } catch (...) {
-    producer_promise.set_exception(std::current_exception());
   }
 }
 
 int main() {
   SharedState shared;
-  std::promise<void> producer_promise;
-  std::future<void> producer_future = producer_promise.get_future();
-
   std::jthread consumer_thread(consumer, std::ref(shared));
-  std::jthread producer_thread(producer, std::ref(shared),
-                               std::ref(producer_promise));
-
-  try {
-    producer_future.get(); // blocks and propagates exception
-  } catch (const std::exception &ex) {
-    std::cout << "Caught exception from producer: " << ex.what() << '\n';
-    consumer_thread.request_stop();
-    std::cout << "Sent stop request to consumer\n";
-  }
+  std::jthread producer_thread(producer, std::ref(shared));
+  std::this_thread::sleep_for(std::chrono::seconds(2));
+  std::cout << "Main thread exiting\n";
 }

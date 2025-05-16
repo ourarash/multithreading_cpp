@@ -20,12 +20,18 @@ void consumer(std::stop_token st) {
   });
 
   std::unique_lock<std::mutex> lock(mtx);
-  cv.wait(lock, [&] { return data_ready || st.stop_requested(); });
+  while (!done) {
+    cv.wait(lock, [&] { return st.stop_requested() || data_ready; });
+    if (st.stop_requested()) {
+      std::cout << "Consumer exiting due to stop\n";
+      return;
+    }
 
-  if (st.stop_requested())
-    std::cout << "Consumer exiting due to stop\n";
-  else
-    std::cout << "Consumer processed data\n";
+    if (data_ready) {
+      std::cout << "Consumer processed data\n";
+      data_ready = false;
+    }
+  }
 }
 
 void producer(std::promise<void> &done_promise) {

@@ -96,7 +96,8 @@
     "queue": "cpp",
     "variant": "cpp",
     "any": "cpp",
-    "span": "cpp"
+    "span": "cpp",
+    "jthread": "cpp"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "never",
