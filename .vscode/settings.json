@@ -94,7 +94,9 @@
     "execution": "cpp",
     "print": "cpp",
     "queue": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "any": "cpp",
+    "span": "cpp"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "never",
