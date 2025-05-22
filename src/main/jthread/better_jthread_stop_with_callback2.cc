@@ -50,9 +50,9 @@ void producer(SharedState &state) {
     {
       std::lock_guard<std::mutex> lock(state.mtx);
       state.data_ready = true;
-      // if (i == 4) {
-      //   done = true; // signal completion
-      // }
+      if (i == 4) {
+        done = true; // signal completion
+      }
     }
     state.cv.notify_one();
   }

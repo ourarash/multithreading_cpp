@@ -19,3 +19,9 @@ cc_library(
         "@com_google_benchmark//:benchmark",
     ],
 )
+
+cc_library(
+    name = "logger",
+    hdrs = ["logger.h"],
+    visibility = ["//visibility:public"],
+)
