@@ -2,6 +2,8 @@
 #include <iostream>
 #include <stdexcept>
 #include <thread>
+#include <ranges>
+#include <numeric>
 
 void worker(std::exception_ptr &eptr) {
   try {
@@ -23,5 +25,8 @@ int main() {
       std::cerr << "Caught from worker: " << e.what() << std::endl;
     }
   }
+
+  int sum = std::ranges::fold_left(values, 0, std::plus{});
+
   return 0;
 }
