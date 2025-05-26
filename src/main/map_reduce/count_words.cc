@@ -32,18 +32,9 @@ int main() {
       [](const std::string &key, const std::vector<int> &values) -> int {
         return std::accumulate(values.begin(), values.end(), 0);
       },
-      4,  // number of threads
-      2   // batch size
-          // optional combiner can be passed here
-          //   ,
-          //   [](ThreadSafeMap<string, int> &store) {
-          //     // Example combiner that sums values for each key
-          //     auto data = store.get_data();
-          //     for (auto &[key, values] : data) {
-          //       int sum = std::accumulate(values.begin(), values.end(), 0);
-          //       store.add(key, sum);
-          //     }
-          //   }
+      /*num_threads=*/4,  // number of threads
+      /*batch_size*/ 2    // batch size
+                          // Optional combiner can be provided here
   );
 
   // Print results
