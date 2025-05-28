@@ -36,6 +36,7 @@ int main() {
   int64_t total = 0;
   for (auto pf : functors) {
     total += pf->_sum;
+    delete pf;
   }
 
   for (auto &pf : functors) {
